@@ -26,23 +26,24 @@
                 <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
                     <p>Cuenta en operacion</p>
 
+                    <a class="text-decoration-none text-black" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <div class="card mb-3 w-100 p-1 border-dark">
+                            <div class="row g-0">
 
-                    <div class="card mb-3 w-100 p-1 border-dark">
-                        <div class="row g-0">
-
-                            <div class="col-md-10">
-                                <div class="card-body">
-                                    <h5 class="card-title">Mesa #</h5>
-                                    <p>Order #</p>
-                                    <p class="card-text"><small class="text-muted">Nombre cuenta</small></p>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <p class="card-title">Mesa ##</p>
+                                        <p>Order ###</p>
+                                        <p class="card-text">Nombre Cliente</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2 d-flex align-items-center justify-content-center">
-                                <button class="btn btn-dark w-100 rounded ">Filtrar</button>
-                            </div>
+                                <div class="col-md-2 pe-5 d-flex align-items-center justify-content-end">
+                                    <button class="btn btn-dark w-100 rounded ">Filtrar</button>
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
+                    </a>
 
 
 
@@ -50,22 +51,24 @@
                 <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                     <p>Cuenta finalizada</p>
 
-                    <div class="card mb-3 w-100 p-1  border-dark ">
-                        <div class="row g-0">
+                    <a class="text-decoration-none text-black" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <div class="card mb-3 w-100 p-1 border-dark">
+                            <div class="row g-0">
 
-                            <div class="col-md-10">
-                                <div class="card-body">
-                                    <h5 class="card-title">Mesa #</h5>
-                                    <p>Order #</p>
-                                    <p class="card-text"><small class="text-muted">Nombre cuenta</small></p>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <p class="card-title">Mesa ##</p>
+                                        <p>Order ###</p>
+                                        <p class="card-text">Nombre Cliente</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2 d-flex align-items-center justify-content-center">
-                                <button class="btn btn-dark w-100 rounded-pill  ">Filtrar</button>
-                            </div>
+                                <div class="col-md-2 pe-5 d-flex align-items-center justify-content-end">
+                                    <button class="btn btn-dark w-100 rounded ">Filtrar</button>
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 
@@ -89,11 +92,6 @@
 
 
 <!-- Modal Rick -->
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Prueba de modal cuentas
-
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -129,58 +127,64 @@
                 <!-- Input texts -->
                 <div class="container">
                     <div class="row">
+                        <!-- Input texts -->
                         <div class="col-sm-9">
                             <div class="row">
                                 <div class="col-8 col-sm-6">
-
                                     <p class="orden text-sm-start">Orden ###</p>
                                     <input type="text" class="form-control">
                                 </div>
                                 <div class="col-4 col-sm-6">
-
                                     <p class="mesa text-sm-start">Mesa #</p>
                                     <input type="text" class="form-control">
-
+                                </div>
+                            </div>
+                            <div class="row py-3">
+                                <div class="col-12">
+                                    <p class="nombre text-sm-start">Nombre</p>
+                                    <input type="text" class="form-control">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-9 py-3">
-                            <p class="nombre text-sm-start">Nombre</p>
-                            <input type="text" class="form-control">
+                        <!-- Subtotal, Propina y Total -->
+                        <div class="col-sm-3 d-flex justify-content-center">
+                            <div class="textototal ">
+                                <h5>Subtotal</h5>
+                                <label class="d-flex justify-content-end" for="subtotal"><p>$38.75</p></label>
 
+                                <h5>Propina</h5>
+                                <label class="d-flex justify-content-end" for="propina"><p>$1.25</p></label>
 
-                        </div>
-
-                        <!-- Input texts -->
-                        <div class="col-sm-3  text-sm-center">
-
-                            <div class="textotoal">
-                                <p> Subtotal:<br>$38.75<br>Propina:<br>$1.25<br>Total:<br>$40.00</p>
+                                <h5>Total</h5>
+                                <label class="d-flex justify-content-end" for="total"><p>$40.00</p></label>
                             </div>
                         </div>
+                    </div>
 
-                        <div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
-                            <ul class="list-group">
+                 <div class="row">
+                      <div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+                           <ul class="list-group">
                                 <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-10">
-                                            Platillo 1
-                                        </div>
-                                        <div class="col">
-                                            <button class="btn btn-dark btnPagar justify-content-end">Estado</button>
-                                        </div>
+                                        <div class="row">
+                                            <div class="col-10">
+                                                Platillo 1
+                                            </div>
+                                            <div class="col">
+                                                <button class="btn btn-dark btnPagar justify-content-end">Estado</button>
+                                            </div>
 
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-10">
-                                            Platillo 2
-                                        </div>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                Platillo 2
+                                            </div>
                                         <div class="col">
                                             <button class="btn btn-dark btnPagar">Estado</button>
                                         </div>
-                                </li>
-                            </ul>
-                        </div>
+                                    </li>
+                           </ul>
+                       </div>
+                 </div>
 
 
                     </div>
