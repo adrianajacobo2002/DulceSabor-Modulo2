@@ -1,0 +1,197 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Example</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Botón que activa la modal -->
+    <button type="button" class="btn btn-primary bg-dark" data-toggle="modal" data-target="#exampleModal">
+        Abrir Modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal modal-xl-centered" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    
+
+
+
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Agregar platillo
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Menú platillos</h5>
+                                            <select class="form-select mb-3" aria-label="Categoría">
+                                                <option selected>Selecciona una categoría</option>
+                                                <option value="entradas">Entradas</option>
+                                                <option value="sopas">Sopas</option>
+                                                <option value="ensaladas">Ensaladas</option>
+                                                <option value="platos-principales">Platos principales</option>
+                                                <option value="postres">Postres</option>
+                                                <option value="bebidas">Bebidas</option>
+                                            </select>
+                                            <table class="table mb-3">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Nombre</th>
+                                                        <th scope="col">Descripción</th>
+                                                        <th scope="col">Precio</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Aquí se mostrarían los elementos de la categoría seleccionada -->
+                                                </tbody>
+                                            </table>
+                                            <h5>Comentarios</h5>
+                                            <input type="text" class="form-control" placeholder="Añade tu comentario...">
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary bg-dark">Guardar cambios</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Agregar combo
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Menú combos</h5>
+                                            <select class="form-select mb-3" aria-label="Categoría">
+                                                <option selected>Selecciona una categoría</option>
+                                                <option value="entradas">Entradas</option>
+                                                <option value="sopas">Sopas</option>
+                                                <option value="ensaladas">Ensaladas</option>
+                                                <option value="platos-principales">Platos principales</option>
+                                                <option value="postres">Postres</option>
+                                                <option value="bebidas">Bebidas</option>
+                                            </select>
+                                            <table class="table mb-3">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Nombre</th>
+                                                        <th scope="col">Descripción</th>
+                                                        <th scope="col">Precio</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Aquí se mostrarían los elementos de la categoría seleccionada -->
+                                                </tbody>
+                                            </table>
+                                            <h5>Comentarios</h5>
+                                            <input type="text" class="form-control" placeholder="Añade tu comentario...">
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary bg-dark">Guardar cambios</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Agregar promocion
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Menú promociones</h5>
+                                            <select class="form-select mb-3" aria-label="Categoría">
+                                                <option selected>Selecciona una categoría</option>
+                                                <option value="entradas">Entradas</option>
+                                                <option value="sopas">Sopas</option>
+                                                <option value="ensaladas">Ensaladas</option>
+                                                <option value="platos-principales">Platos principales</option>
+                                                <option value="postres">Postres</option>
+                                                <option value="bebidas">Bebidas</option>
+                                            </select>
+                                            <table class="table mb-3">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Nombre</th>
+                                                        <th scope="col">Descripción</th>
+                                                        <th scope="col">Precio</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Aquí se mostrarían los elementos de la categoría seleccionada -->
+                                                </tbody>
+                                            </table>
+                                            <h5>Comentarios</h5>
+                                            <input type="text" class="form-control" placeholder="Añade tu comentario...">
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary bg-dark">Guardar cambios</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary bg-dark">Guardar cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
