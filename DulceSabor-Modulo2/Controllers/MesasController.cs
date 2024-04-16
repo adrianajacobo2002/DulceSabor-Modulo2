@@ -8,5 +8,9 @@ namespace DulceSabor_Modulo2.Controllers
         {
             return View();
         }
+        public IActionResult Detalle()
+        {
+            return View();
+        }
     }
 }
