@@ -18,10 +18,49 @@
         <!-- Tab panes -->
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tabDisponible">
+                <div class="row py-4 d-flex">
+                        
+                    @foreach (var mesa in (IEnumerable<dynamic>)ViewData["listadoMesas"]){
+                        <div class ="col-md-2 text-center py-3">
+                                
+                            <div class="card">
+                                <a href="#">
+                                    <div class="card-body">
+                                        <img src="#" alt="" />
+                                        <p>*inserte imagen acá</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="pt-3">
+                                <small>Mesa @mesa.nummesa <span class="badge text-white bg-primary"> Disponible</span></small>
+                            </div>
+                        </div>
+                    }
 
+                </div>
             </div>
             <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tabOcupadas">
+                <div class="row py-4 d-flex">
 
+                    @foreach (var mesa in (IEnumerable<dynamic>)ViewData["listadoMesas"])
+                    {
+                        <div class="col-md-2 text-center py-3">
+
+                            <div class="card">
+                                <a href="#">
+                                    <div class="card-body">
+                                        <img src="#" alt="" />
+                                        <p>*inserte imagen acá</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="pt-3">
+                                <small>Mesa @mesa.nummesa <span class="badge text-white bg-danger"> No Disponible</span></small>
+                            </div>
+                        </div>
+                    }
+
+                </div>
             </div>
         </div>
     </div>
