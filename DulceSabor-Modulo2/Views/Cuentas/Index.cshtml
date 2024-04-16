@@ -1,9 +1,10 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿
 
-}
+    
+
+
+
+<!--La vaina de Drigo jejejjejeje-->
 
 <div class="container">
     <div class="row">
@@ -83,3 +84,110 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
+
+
+
+
+<!-- Modal Rick -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Prueba de modal cuentas
+
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!--  titulo dettalle y boton estado -->
+                <div class="container text">
+                    <div class="row">
+                        <div class="col">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Detalles de la cuenta</h1>
+                        </div>
+
+                        <div class="col">
+
+                            <div class="btn-1 justify-content-end d-flex">
+                                <p>
+                                    <button class="btn btn-dark btnestado">Estado</button>
+                                </p>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- Input texts -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="row">
+                                <div class="col-8 col-sm-6">
+
+                                    <p class="orden text-sm-start">Orden ###</p>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="col-4 col-sm-6">
+
+                                    <p class="mesa text-sm-start">Mesa #</p>
+                                    <input type="text" class="form-control">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-9 py-3">
+                            <p class="nombre text-sm-start">Nombre</p>
+                            <input type="text" class="form-control">
+
+
+                        </div>
+
+                        <!-- Input texts -->
+                        <div class="col-sm-3  text-sm-center">
+
+                            <div class="textotoal">
+                                <p> Subtotal:<br>$38.75<br>Propina:<br>$1.25<br>Total:<br>$40.00</p>
+                            </div>
+                        </div>
+
+                        <div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-10">
+                                            Platillo 1
+                                        </div>
+                                        <div class="col">
+                                            <button class="btn btn-dark btnPagar justify-content-end">Estado</button>
+                                        </div>
+
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-10">
+                                            Platillo 2
+                                        </div>
+                                        <div class="col">
+                                            <button class="btn btn-dark btnPagar">Estado</button>
+                                        </div>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer justify-content-center d-flex">
+                        <button class="btn btn-dark btnPagar justify-content-center">Pagar</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
