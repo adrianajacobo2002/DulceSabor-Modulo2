@@ -9,41 +9,46 @@
     <link rel="stylesheet" href="~/DulceSabor_Modulo2.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DulceSabor_Modulo2</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 ">
+                <div class="d-flex flex-column px-3 pt-4 text-white min-vh-100">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item py-2">
+                            <h1><a class="nav-link pb-3 me-md-auto text-black text-decoration-none" asp-area="" asp-controller="Mesas" asp-action="Index">Dulce Sabor</a></h1>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item py-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mesas" asp-action="Index">Mesas</a>
+                        </li>
+                        <li class="nav-item py-2">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mesas" asp-action="Index">Mesas</a>
                         </li>
                     </ul>
+                    <hr>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+            <div class="col py-3 px-5 pt-5">
+                <div class="container">
+                    <main role="main" class="">
+                        @RenderBody()
+                    </main>
+                </div>
+                
+            </div>
+        </div>
+       
     </div>
-
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted fixed-bottom py-2 text-center">
         <div class="container">
-            &copy; 2024 - DulceSabor_Modulo2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - Dulce Sabor - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
