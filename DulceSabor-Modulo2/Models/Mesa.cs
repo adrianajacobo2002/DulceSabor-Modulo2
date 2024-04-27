@@ -10,4 +10,6 @@ public partial class Mesa
     public int? NumeroAsientos { get; set; }
 
     public int? NumeroMesa { get; set; }
+
+    public bool? Estado { get; set; }
 }

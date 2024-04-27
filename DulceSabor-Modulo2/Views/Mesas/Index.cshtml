@@ -19,34 +19,33 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tabDisponible">
                 <div class="row py-4 d-flex">
-                        
-                    @foreach (var mesa in (IEnumerable<dynamic>)ViewData["listadoMesas"]){
+                    @foreach (var mesa in (IEnumerable<dynamic>)ViewData["mesasDisponibles"])
+                    {
                         <div class ="col-md-2 text-center py-3">
                                 
                             <div class="card">
-                                <a class="" asp-area="" asp-controller="Mesas" asp-action="Detalle">
+                                <a class="" href="@Url.Action("Detalle", "Mesas", new { Id = mesa.Id })">
                                     <div class="card-body">
                                         <img src="./img/mesas.png" alt="" width="100px" height="100px" />
                                     </div>
                                 </a>
                             </div>
                             <div class="pt-3">
-                                <small>Mesa @mesa.nummesa <span class="badge text-white bg-primary"> Disponible</span></small>
+                                <small>Mesa @mesa.NumeroMesa <span class="badge text-white bg-primary"> Disponible</span></small>
                             </div>
                         </div>
                     }
-
                 </div>
             </div>
             <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tabOcupadas">
                 <div class="row py-4 d-flex">
 
-                    @foreach (var mesa in (IEnumerable<dynamic>)ViewData["listadoMesas"])
+                    @foreach (var mesa in (IEnumerable<dynamic>)ViewData["mesasNoDisponibles"])
                     {
                         <div class="col-md-2 text-center py-3">
 
                             <div class="card">
-                                <a class="" asp-area="" asp-controller="Mesas" asp-action="Detalle">
+                                <a class="" href="@Url.Action("Detalle", "Mesas", new { Id = mesa.Id })">
                                     <div class="card-body">
                                         <img src="./img/mesas.png" alt="" width="100px" height="100px" />
                                     </div>
@@ -54,7 +53,7 @@
                             </div>
 
                             <div class="pt-3">
-                                <small>Mesa @mesa.nummesa <span class="badge text-white bg-danger"> No Disponible</span></small>
+                                <small>Mesa @mesa.NumeroMesa <span class="badge text-white bg-danger"> No Disponible</span></small>
                             </div>
                         </div>
                     }
