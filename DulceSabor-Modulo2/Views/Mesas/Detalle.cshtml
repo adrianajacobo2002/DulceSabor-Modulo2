@@ -188,119 +188,52 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
-                    
                     <div class="container">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs border-dark" id="myTabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active text-dark" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Entradas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-danger" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Platos Principales</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-danger" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Postres</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-danger" id="tab4-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">Bebidas</a>
-                            </li>
-                        </ul>
+                        <div class="row py-4 d-flex">
+                            <h5 class="py-3">Platos</h5>
 
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tabDisponible">
-                                <div class="row py-4 d-flex">
-                                    <h5 class="py-3">Agregar Platillos</h5>
-
+                            @foreach (var plato in (IEnumerable<dynamic>)ViewData["totalPlatos"])
+                            {
+                                <form asp-action="AgregarComida">
                                     <div class="col-md-4 py-3">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h5 class="card-title mb-2">Entrada 1</h5>
-                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
+                                                <h5 class="card-title mb-2">@plato.Nombre</h5>
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $@plato.Precio</h6>
                                                 <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                                <input class="btn btn-dark my-3" type="submit" value="Agregar">
+                                                <textarea class="form-control" id="comentario" name="comentario" rows="5"></textarea>
+                                                @Html.Hidden("platoId", (int)plato.PromocionId)
+                                                @Html.Hidden("precio", (decimal)plato.Precio)
+                                                @Html.Hidden("idCuenta", cuenta.IdCuenta)
+                                                <button type="submit" class="btn btn-dark my-3">Agregar</button>
                                             </div>
                                         </div>
                                     </div>
-
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tabOcupadas">
-                                <div class="row py-4 d-flex">
-                                    <h5 class="py-3">Agregar Platillos</h5>
-
-                                    <div class="col-md-4 py-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title mb-2">Plato 1</h5>
-                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
-                                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                                <input class="btn btn-dark my-3" type="submit" value="Agregar">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tabOcupadas">
-                                <div class="row py-4 d-flex">
-                                    <h5 class="py-3">Agregar Platillos</h5>
-
-                                    <div class="col-md-4 py-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title mb-2">Postre 1</h5>
-                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
-                                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                                <input class="btn btn-dark my-3" type="submit" value="Agregar">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tabOcupadas">
-                                <div class="row py-4 d-flex">
-                                    <h5 class="py-3">Agregar Platillos</h5>
-
-                                    <div class="col-md-4 py-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title mb-2">Bebida 1</h5>
-                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
-                                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                                <input class="btn btn-dark my-3" type="submit" value="Agregar">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                                </form>
+                            }
                         </div>
-
-                    </div>
-
-                    <div class="container">
-
                         <div class="row py-4 d-flex">
                             <h5 class="py-3">Agregar Combos</h5>
 
-                            <div class="col-md-4 py-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-2">Combo 1</h5>
-                                        <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
-                                        <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                        <input class="btn btn-dark my-3" type="submit" value="Agregar">
+                            @foreach (var plato in (IEnumerable<dynamic>)ViewData["totalCombos"])
+                            {
+                                <form asp-action="AgregarComida">
+                                    <div class="col-md-4 py-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-2">@plato.Nombre</h5>
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $@plato.Precio</h6>
+                                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
+                                                <textarea class="form-control" id="comentario" name="comentario" rows="5"></textarea>
+                                                @Html.Hidden("comboId", (int)plato.ComboId)
+                                                @Html.Hidden("precio", (decimal)plato.Precio)
+                                                @Html.Hidden("idCuenta", cuenta.IdCuenta)
+                                                <button type="submit" class="btn btn-dark my-3">Agregar</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-
+                                </form>
+                            }
                         </div>
 
                     </div>
@@ -311,26 +244,27 @@
                             <h5 class="py-3">Agregar Promoción</h5>
 
 
-                            <div class="col-md-4 py-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-2">Promocion 1</h5>
-                                        <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
-                                        <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                        <input class="btn btn-dark my-3" type="submit" value="Agregar">
+                            @foreach (var plato in (IEnumerable<dynamic>)ViewData["totalPromos"])
+                            {
+                                <form asp-action="AgregarComida">
+                                    <div class="col-md-4 py-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-2">@plato.Nombre</h5>
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $@plato.Precio</h6>
+                                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
+                                                <textarea class="form-control" id="comentario" name="comentario" rows="5"></textarea>
+                                                @Html.Hidden("promoId", (int)plato.PlatoId)
+                                                @Html.Hidden("precio", (decimal)plato.Precio)
+                                                @Html.Hidden("idCuenta", cuenta.IdCuenta)
+                                                <button type="submit" class="btn btn-dark my-3">Agregar</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-
+                                </form>
+                            }
                         </div>
-
                     </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary bg-dark">Guardar cambios</button>
                 </div>
             </div>
         </div>

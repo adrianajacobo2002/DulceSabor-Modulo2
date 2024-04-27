@@ -46,7 +46,9 @@ namespace DulceSabor_Modulo2.Controllers
             Cuenta? cuenta = _restauranteContext.Cuentas.FirstOrDefault(c => c.IdCuenta == model.cuentaId);
             if (cuenta != null)
             {
+                Mesa? mesa = _restauranteContext.Mesas.FirstOrDefault(m => m.Id == cuenta.IdMesa);
                 cuenta.Estado = "CERRADO";
+                mesa.Estado = true;
                 _restauranteContext.SaveChanges();
             }
             return RedirectToAction("Index");

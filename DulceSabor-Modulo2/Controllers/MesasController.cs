@@ -42,6 +42,9 @@ namespace DulceSabor_Modulo2.Controllers
                               estado = m.Estado
                           }).ToList();
 
+            var totalPlatos = (from p in _restauranteContext.Platos
+                               select p).ToList();
+
             var promociones = (from m in _restauranteContext.DetalleCuentas
                           join p in _restauranteContext.Promociones on m.IdPromocion equals p.PromocionId
                           where m.IdPromocion != null
@@ -53,6 +56,9 @@ namespace DulceSabor_Modulo2.Controllers
                                    estado = m.Estado
                                }).ToList();
 
+            var totalPromos = (from p in _restauranteContext.Promociones
+                               select p).ToList();
+
             var combos = (from m in _restauranteContext.DetalleCuentas
                           join p in _restauranteContext.Combos on m.IdCombo equals p.ComboId
                           where m.IdCombo != null
@@ -63,6 +69,9 @@ namespace DulceSabor_Modulo2.Controllers
                               estado = m.Estado
                           }).ToList();
 
+            var totalCombos = (from p in _restauranteContext.Combos
+                               select p).ToList();
+
             Cuenta? c = (from m in _restauranteContext.Cuentas
                         where m.IdMesa == Id && m.Estado.Equals("ABIERTO")
                         select m).FirstOrDefault();
@@ -71,8 +80,11 @@ namespace DulceSabor_Modulo2.Controllers
             ViewData["total"] = platos.Sum(d => d.precio) + promociones.Sum(d => d.precio) + combos.Sum(d => d.precio);
             ViewData["cuenta"] = c;
             ViewData["platos"] = platos;
+            ViewData["totalPlatos"] = totalPlatos;
             ViewData["promociones"] = promociones;
+            ViewData["totalPromos"] = totalPromos;
             ViewData["combos"] = combos;
+            ViewData["totalCombos"] = totalCombos;
 
             return View();
         }
@@ -96,6 +108,25 @@ namespace DulceSabor_Modulo2.Controllers
 
             return RedirectToAction("Detalle", new { Id = model.idMesa });
         }
+
+        public IActionResult AgregarComida(AgregarComidaForm model)
+        {
+            int? IdMesa = _restauranteContext.Cuentas?.FirstOrDefault(c => c.IdCuenta == model.idCuenta)?.IdMesa;
+            DetalleCuenta dc = new()
+            {
+                IdCuenta = model.idCuenta,
+                IdPlato = model.platoId,
+                IdCombo = model.comboId,
+                IdPromocion = model.promoId,
+                Precio = model.precio,
+                Descuento = 0,
+                Comentario = model.comentario,
+                Estado = "SOLICITADO"
+            };
+            _restauranteContext.DetalleCuentas.Add(dc);
+            _restauranteContext.SaveChanges();
+            return RedirectToAction("Detalle", new { Id = IdMesa });
+        }
     }
 
     public class AgregarClienteForm ()
@@ -103,5 +134,15 @@ namespace DulceSabor_Modulo2.Controllers
         public string nombre { get; set; }
         public string apellido { get; set; }
         public int idMesa { get; set; }
+    }
+
+    public class AgregarComidaForm
+    {
+        public string comentario { get; set; }
+        public int idCuenta { get; set; }
+        public int? platoId { get; set; }
+        public int? promoId { get; set; }
+        public int? comboId { get; set; }
+        public decimal precio {  get; set; }
     }
 }
