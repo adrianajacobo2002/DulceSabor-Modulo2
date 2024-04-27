@@ -17,25 +17,21 @@
             <div class="row pb-4">
                 <div class="col-md-5">
                     <label for="nombre"><h5>Nombre</h5></label>
-
-
                 </div>
                 <div class="col-md-5">
                     <label for="nombre"><h5>Apellido</h5></label>
-
                 </div>
-
             </div>
             <div class="row">
                 <form asp-action="AgregarCliente">
                     <div class="col-md-5">
-                        @Html.TextBox("nombre", "", new { @class = "form-control", placeholder = "Escribe tu nombre aquí" })
+                        @Html.TextBox("nombre", "", new { @class = "form-control", placeholder = "Escribe tu nombre aquí", required = true })
                     </div>
                     <div class="col-md-5">
-                        @Html.TextBox("apellido", "", new { @class = "form-control", placeholder = "Escribe tu apellido aquí" })
+                        @Html.TextBox("apellido", "", new { @class = "form-control", placeholder = "Escribe tu apellido aquí", required = true })
                     </div>
                     @Html.Hidden("idMesa", id)
-                    <div class="col-md-2 col-sm-10 d-flex justify-content-center align-items-center">
+                    <div class="col-md-2 d-flex justify-content-center align-items-center">
                         <button class="btn btn-dark rounded-3 ms-4" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
@@ -60,7 +56,7 @@
                                     <p>Order @cuenta.IdCuenta</p>
                                 </a>
 
-                                <p class="card-text">Subtotal: @ViewData["total"]</p>
+                                <p class="card-text">Subtotal: $@ViewData["total"]</p>
                             </div>
                         </div>
                         <div class="col-md-2 pe-5 d-flex align-items-center justify-content-end">
@@ -99,10 +95,42 @@
                                                     </div>
 
                                                     <div class="d-flex justify-content-end align-items-end">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" data-bs-toggle="modal" data-bs-target="#modal-platos-@detalle.IdDetalleCuenta" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                                                         </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modal-platos-@detalle.IdDetalleCuenta" tabindex="-1" aria-labelledby="modal-platos-@detalle.IdDetalleCuenta" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel2">Cambiar Estado</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <form asp-action="ActualizarEstadoDetalle">
+                                                            <div class="col-md-6">
+                                                                <select class="form-select" required id="estado" name="estado" aria-label="Default select example">
+                                                                    <option selected value="">Seleccionar un estado</option>
+                                                                    <option value="SOLICITADO">SOLICITADO</option>
+                                                                    <option value="EN PROCESO">EN PROCESO</option>
+                                                                    <option value="FINALIZADO">FINALIZADO</option>
+                                                                    <option value="ENTREGADO">ENTREGADO</option>
+                                                                    <option value="CANCELADO">CANCELADO</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                @Html.Hidden("idDetalle", (int)@detalle.IdDetalleCuenta)
+                                                                <input class="btn btn-dark" type="submit" value="Cambiar">
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -127,7 +155,7 @@
                                                         <small>Comentarios: @detalle.comentario</small>
                                                     </div>
 
-                                                    <div class="d-flex justify-content-end align-items-end">
+                                                    <div class="d-flex justify-content-end align-items-end" data-bs-toggle="modal-detalle-@detalle.IdDetalleCuenta" data-bs-target="#modal-detalle-@detalle.IdDetalleCuenta">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
@@ -156,7 +184,7 @@
                                                         <small>Comentarios: @detalle.comentario</small>
                                                     </div>
 
-                                                    <a class="btn text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                                    <a class="btn text-decoration-none" data-bs-toggle="modal-detalle-@detalle.IdDetalleCuenta" data-bs-target="#modal-detalle-@detalle.IdDetalleCuenta">
                                                         <div class="d-flex justify-content-end align-items-end">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -174,209 +202,102 @@
 
                     </div>
                 </div>
+
+                <!-- Modal -->
+    <div class="modal modal-xl-centered" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row py-4 d-flex">
+                                        <h5 class="py-3">Platos</h5>
+
+                                        @foreach (var plato in (IEnumerable<dynamic>)ViewData["totalPlatos"])
+                                        {
+                                            <form asp-action="AgregarComida">
+                                                <div class="col-md-4 py-3">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title mb-2">@plato.Nombre</h5>
+                                                            <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $@plato.Precio</h6>
+                                                            <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
+                                                            <textarea class="form-control" id="comentario" name="comentario" rows="5"></textarea>
+                                                            @Html.Hidden("platoId", (int)plato.PlatoId)
+                                                            @Html.Hidden("precio", (decimal)plato.Precio)
+                                                            @Html.Hidden("idCuenta", cuenta.IdCuenta)
+                                                            <button type="submit" class="btn btn-dark my-3">Agregar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        }
+                                    </div>
+                                    <div class="row py-4 d-flex">
+                                        <h5 class="py-3">Agregar Combos</h5>
+
+                                        @foreach (var plato in (IEnumerable<dynamic>)ViewData["totalCombos"])
+                                        {
+                                            <form asp-action="AgregarComida">
+                                                <div class="col-md-4 py-3">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title mb-2">@plato.Nombre</h5>
+                                                            <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $@plato.Precio</h6>
+                                                            <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
+                                                            <textarea class="form-control" id="comentario" name="comentario" rows="5"></textarea>
+                                                            @Html.Hidden("comboId", (int)plato.ComboId)
+                                                            @Html.Hidden("precio", (decimal)plato.Precio)
+                                                            @Html.Hidden("idCuenta", cuenta.IdCuenta)
+                                                            <button type="submit" class="btn btn-dark my-3">Agregar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        }
+                                    </div>
+
+                                </div>
+
+                                <div class="container">
+
+                                    <div class="row py-4 d-flex">
+                                        <h5 class="py-3">Agregar Promoción</h5>
+
+
+                                        @foreach (var plato in (IEnumerable<dynamic>)ViewData["totalPromos"])
+                                        {
+                                            <form asp-action="AgregarComida">
+                                                <div class="col-md-4 py-3">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title mb-2">@plato.Nombre</h5>
+                                                            <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $@plato.Precio</h6>
+                                                            <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
+                                                            <textarea class="form-control" id="comentario" name="comentario" rows="5"></textarea>
+                                                            @Html.Hidden("promoId", (int)plato.PromocionId)
+                                                            @Html.Hidden("precio", (decimal)plato.Precio)
+                                                            @Html.Hidden("idCuenta", cuenta.IdCuenta)
+                                                            <button type="submit" class="btn btn-dark my-3">Agregar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
         </div>
     </div>
-
-
-    <!-- Modal -->
-    <div class="modal modal-xl-centered" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    
-                    <div class="container">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs border-dark" id="myTabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active text-dark" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Entradas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-danger" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Platos Principales</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-danger" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Postres</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-danger" id="tab4-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">Bebidas</a>
-                            </li>
-                        </ul>
-
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tabDisponible">
-                                <div class="row py-4 d-flex">
-                                    <h5 class="py-3">Agregar Platillos</h5>
-
-                                    <div class="col-md-4 py-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title mb-2">Entrada 1</h5>
-                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
-                                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                                <input class="btn btn-dark my-3" type="submit" value="Agregar">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tabOcupadas">
-                                <div class="row py-4 d-flex">
-                                    <h5 class="py-3">Agregar Platillos</h5>
-
-                                    <div class="col-md-4 py-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title mb-2">Plato 1</h5>
-                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
-                                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                                <input class="btn btn-dark my-3" type="submit" value="Agregar">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tabOcupadas">
-                                <div class="row py-4 d-flex">
-                                    <h5 class="py-3">Agregar Platillos</h5>
-
-                                    <div class="col-md-4 py-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title mb-2">Postre 1</h5>
-                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
-                                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                                <input class="btn btn-dark my-3" type="submit" value="Agregar">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tabOcupadas">
-                                <div class="row py-4 d-flex">
-                                    <h5 class="py-3">Agregar Platillos</h5>
-
-                                    <div class="col-md-4 py-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title mb-2">Bebida 1</h5>
-                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
-                                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                                <input class="btn btn-dark my-3" type="submit" value="Agregar">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="container">
-
-                        <div class="row py-4 d-flex">
-                            <h5 class="py-3">Agregar Combos</h5>
-
-                            <div class="col-md-4 py-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-2">Combo 1</h5>
-                                        <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
-                                        <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                        <input class="btn btn-dark my-3" type="submit" value="Agregar">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="container">
-
-                        <div class="row py-4 d-flex">
-                            <h5 class="py-3">Agregar Promoción</h5>
-
-
-                            <div class="col-md-4 py-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-2">Promocion 1</h5>
-                                        <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
-                                        <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                                        <input class="btn btn-dark my-3" type="submit" value="Agregar">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary bg-dark">Guardar cambios</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-        Launch demo modal
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel2">Cambiar Estado</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Seleccionar un estado</option>
-                                <option value="1">Solicitado</option>
-                                <option value="2">En Proceso</option>
-                                <option value="3">Finalizado</option>
-                                <option value="4">Entregado</option>
-                                <option value="5">Cancelado</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <input class="btn btn-dark" type="submit" value="Cambiar">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
