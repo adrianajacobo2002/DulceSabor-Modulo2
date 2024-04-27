@@ -181,99 +181,99 @@
     <div class="modal modal-xl-centered" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="modal-body">
 
-                    <div class="accordion" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button bg-white text-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Agregar platillo
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
+                    
+                    <div class="container">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs border-dark" id="myTabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active text-dark" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Entradas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-danger" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Platos Principales</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-danger" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Postres</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-danger" id="tab4-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">Bebidas</a>
+                            </li>
+                        </ul>
 
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tabDisponible">
+                                <div class="row py-4 d-flex">
+                                    <h5 class="py-3">Agregar Platillos</h5>
 
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Menú platillos</h5>
-                                            <select class="form-select mb-3" aria-label="Categoría">
-                                                <option selected>Selecciona una categoría</option>
-                                                <option value="entradas">Entradas</option>
-                                                <option value="sopas">Sopas</option>
-                                                <option value="ensaladas">Ensaladas</option>
-                                                <option value="platos-principales">Platos principales</option>
-                                                <option value="postres">Postres</option>
-                                                <option value="bebidas">Bebidas</option>
-                                            </select>
-                                            <table class="table mb-3">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">Nombre</th>
-                                                        <th scope="col">Descripción</th>
-                                                        <th scope="col">Precio</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <!-- Aquí se mostrarían los elementos de la categoría seleccionada -->
-                                                </tbody>
-                                            </table>
-                                            <h5>Comentarios</h5>
-                                            <input type="text" class="form-control" placeholder="Añade tu comentario...">
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary bg-dark">Guardar cambios</button>
+                                    <div class="col-md-4 py-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-2">Entrada 1</h5>
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
+                                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                                <input class="btn btn-dark my-3" type="submit" value="Agregar">
                                             </div>
                                         </div>
                                     </div>
 
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tabOcupadas">
+                                <div class="row py-4 d-flex">
+                                    <h5 class="py-3">Agregar Platillos</h5>
 
+                                    <div class="col-md-4 py-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-2">Plato 1</h5>
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
+                                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                                <input class="btn btn-dark my-3" type="submit" value="Agregar">
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed bg-white text-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Agregar combo
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
+                            <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tabOcupadas">
+                                <div class="row py-4 d-flex">
+                                    <h5 class="py-3">Agregar Platillos</h5>
 
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Menú combos</h5>
-                                            <select class="form-select mb-3" aria-label="Categoría">
-                                                <option selected>Selecciona una categoría</option>
-                                                <option value="entradas">Entradas</option>
-                                                <option value="sopas">Sopas</option>
-                                                <option value="ensaladas">Ensaladas</option>
-                                                <option value="platos-principales">Platos principales</option>
-                                                <option value="postres">Postres</option>
-                                                <option value="bebidas">Bebidas</option>
-                                            </select>
-
-                                            <div class=" py-3">
-                                                <table class="table mb-3">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">Nombre</th>
-                                                            <th scope="col">Descripción</th>
-                                                            <th scope="col">Precio</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!-- Aquí se mostrarían los elementos de la categoría seleccionada -->
-                                                    </tbody>
-                                                </table>
+                                    <div class="col-md-4 py-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-2">Postre 1</h5>
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
+                                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                                <input class="btn btn-dark my-3" type="submit" value="Agregar">
                                             </div>
+                                        </div>
+                                    </div>
 
-                                            <h5>Comentarios</h5>
-                                            <input type="text" class="form-control" placeholder="Añade tu comentario...">
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary bg-dark">Guardar cambios</button>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tabOcupadas">
+                                <div class="row py-4 d-flex">
+                                    <h5 class="py-3">Agregar Platillos</h5>
+
+                                    <div class="col-md-4 py-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-2">Bebida 1</h5>
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
+                                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                                <input class="btn btn-dark my-3" type="submit" value="Agregar">
                                             </div>
                                         </div>
                                     </div>
@@ -281,54 +281,51 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed bg-white text-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Agregar promocion
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
 
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Menú promociones</h5>
-                                            <select class="form-select mb-3" aria-label="Categoría">
-                                                <option selected>Selecciona una categoría</option>
-                                                <option value="entradas">Entradas</option>
-                                                <option value="sopas">Sopas</option>
-                                                <option value="ensaladas">Ensaladas</option>
-                                                <option value="platos-principales">Platos principales</option>
-                                                <option value="postres">Postres</option>
-                                                <option value="bebidas">Bebidas</option>
-                                            </select>
-                                            <table class="table mb-3">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">Nombre</th>
-                                                        <th scope="col">Descripción</th>
-                                                        <th scope="col">Precio</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <!-- Aquí se mostrarían los elementos de la categoría seleccionada -->
-                                                </tbody>
-                                            </table>
-                                            <h5>Comentarios</h5>
-                                            <input type="text" class="form-control" placeholder="Añade tu comentario...">
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary bg-dark">Guardar cambios</button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
+                    <div class="container">
 
+                        <div class="row py-4 d-flex">
+                            <h5 class="py-3">Agregar Combos</h5>
+
+                            <div class="col-md-4 py-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-2">Combo 1</h5>
+                                        <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
+                                        <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                        <input class="btn btn-dark my-3" type="submit" value="Agregar">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="container">
+
+                        <div class="row py-4 d-flex">
+                            <h5 class="py-3">Agregar Promoción</h5>
+
+
+                            <div class="col-md-4 py-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-2">Promocion 1</h5>
+                                        <h6 class="card-subtitle mb-2 text-body-secondary">Precio: $00.00</h6>
+                                        <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                        <input class="btn btn-dark my-3" type="submit" value="Agregar">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
 
 
                 </div>
