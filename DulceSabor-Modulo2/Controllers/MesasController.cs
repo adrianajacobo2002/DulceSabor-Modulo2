@@ -31,25 +31,36 @@ namespace DulceSabor_Modulo2.Controllers
                           where m.Id == Id
                           select m).FirstOrDefault();
 
+            Cuenta? cuenta = (from m in _restauranteContext.Cuentas
+                         where m.IdMesa == Id && m.Estado.Equals("ABIERTO")
+                         select m).FirstOrDefault();
+
             var platos = (from m in _restauranteContext.DetalleCuentas
                           join p in _restauranteContext.Platos on m.IdPlato equals p.PlatoId
-                          where m.IdPlato != null
+                          join c in _restauranteContext.Cuentas on m.IdCuenta equals c.IdCuenta
+                          join dc in _restauranteContext.DetalleCuentas on c.IdCuenta equals dc.IdCuenta
+                          where m.IdPlato != null && c.IdMesa == Id && c.Estado == "ABIERTO"
+                          group new { m, p } by m.IdDetalleCuenta into g
                           select new
                           {
-                              nombre = p.Nombre,
-                              precio = m.Precio,
-                              comentario = m.Comentario,
-                              estado = m.Estado
+                              g.FirstOrDefault().m.IdDetalleCuenta,
+                              nombre = g.FirstOrDefault().p.Nombre,
+                              precio = g.FirstOrDefault().m.Precio,
+                              comentario = g.FirstOrDefault().m.Comentario,
+                              estado = g.FirstOrDefault().m.Estado
                           }).ToList();
 
             var totalPlatos = (from p in _restauranteContext.Platos
                                select p).ToList();
 
             var promociones = (from m in _restauranteContext.DetalleCuentas
-                          join p in _restauranteContext.Promociones on m.IdPromocion equals p.PromocionId
-                          where m.IdPromocion != null
+                               join p in _restauranteContext.Promociones on m.IdPromocion equals p.PromocionId
+                               join c in _restauranteContext.Cuentas on m.IdCuenta equals c.IdCuenta
+                               join dc in _restauranteContext.DetalleCuentas on c.IdCuenta equals dc.IdCuenta
+                               where m.IdPromocion != null && c.IdMesa == Id && c.Estado == "ABIERTO"
                                select new
                                {
+                                   dc.IdDetalleCuenta,
                                    nombre = "Promo " + p.Nombre,
                                    precio = m.Precio,
                                    comentario = m.Comentario,
@@ -61,8 +72,11 @@ namespace DulceSabor_Modulo2.Controllers
 
             var combos = (from m in _restauranteContext.DetalleCuentas
                           join p in _restauranteContext.Combos on m.IdCombo equals p.ComboId
-                          where m.IdCombo != null
+                          join c in _restauranteContext.Cuentas on m.IdCuenta equals c.IdCuenta
+                          join dc in _restauranteContext.DetalleCuentas on c.IdCuenta equals dc.IdCuenta
+                          where m.IdCombo != null && c.IdMesa == Id && c.Estado == "ABIERTO"
                           select new {
+                              dc.IdDetalleCuenta,
                               nombre = "Combo " + p.Nombre,
                               precio = m.Precio,
                               comentario = m.Comentario,
@@ -72,13 +86,9 @@ namespace DulceSabor_Modulo2.Controllers
             var totalCombos = (from p in _restauranteContext.Combos
                                select p).ToList();
 
-            Cuenta? c = (from m in _restauranteContext.Cuentas
-                        where m.IdMesa == Id && m.Estado.Equals("ABIERTO")
-                        select m).FirstOrDefault();
-
             ViewData["mesa"] = mesa;
             ViewData["total"] = platos.Sum(d => d.precio) + promociones.Sum(d => d.precio) + combos.Sum(d => d.precio);
-            ViewData["cuenta"] = c;
+            ViewData["cuenta"] = cuenta;
             ViewData["platos"] = platos;
             ViewData["totalPlatos"] = totalPlatos;
             ViewData["promociones"] = promociones;
@@ -127,6 +137,24 @@ namespace DulceSabor_Modulo2.Controllers
             _restauranteContext.SaveChanges();
             return RedirectToAction("Detalle", new { Id = IdMesa });
         }
+
+        public IActionResult ActualizarEstadoDetalle(ActualizarEstadoDetalleForm model)
+        {
+            int? IdMesa = (from ed in _restauranteContext.DetalleCuentas
+                          join c in _restauranteContext.Cuentas on ed.IdCuenta equals c.IdCuenta
+                          join m in _restauranteContext.Mesas on c.IdMesa equals m.Id
+                          where ed.IdDetalleCuenta == model.idDetalle
+                          select m.NumeroMesa).FirstOrDefault();
+
+            DetalleCuenta? dc = _restauranteContext.DetalleCuentas.FirstOrDefault(dc => dc.IdDetalleCuenta == model.idDetalle);
+            if (dc != null)
+            {
+                dc.Estado = model.estado;
+                _restauranteContext.SaveChanges();
+            }
+
+            return RedirectToAction("Detalle", new { Id = IdMesa });
+        }
     }
 
     public class AgregarClienteForm ()
@@ -144,5 +172,11 @@ namespace DulceSabor_Modulo2.Controllers
         public int? promoId { get; set; }
         public int? comboId { get; set; }
         public decimal precio {  get; set; }
+    }
+
+    public class ActualizarEstadoDetalleForm()
+    {
+        public int? idDetalle { get; set; }
+        public string estado { get; set; }
     }
 }
