@@ -8,9 +8,9 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-10 pb-3">
             <h1>Cuentas</h1>
-
+            
             <!-- Nav tabs -->
             <ul class="nav nav-tabs border-dark" id="myTabs" role="tablist">
                 <li class="nav-item">
@@ -23,10 +23,9 @@
 
             <!-- Tab panes -->
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
-                    <p>Cuenta en operacion</p>
+                <div class="tab-pane fade show active py-5" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
 
-                    <a class="text-decoration-none text-black" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <a class="text-decoration-none text-black py-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         <div class="card mb-3 w-100 p-1 border-dark">
                             <div class="row g-0">
 
@@ -38,7 +37,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 pe-5 d-flex align-items-center justify-content-end">
-                                    <button class="btn btn-dark w-100 rounded ">Filtrar</button>
+                                    <button class="btn btn-dark w-100 rounded ">Estado</button>
                                 </div>
 
                             </div>
@@ -48,10 +47,9 @@
 
 
                 </div>
-                <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-                    <p>Cuenta finalizada</p>
+                <div class="tab-pane fade py-5" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
 
-                    <a class="text-decoration-none text-black" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <a class="text-decoration-none text-black py-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         <div class="card mb-3 w-100 p-1 border-dark">
                             <div class="row g-0">
 
@@ -63,7 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 pe-5 d-flex align-items-center justify-content-end">
-                                    <button class="btn btn-dark w-100 rounded ">Filtrar</button>
+                                    <button class="btn btn-dark w-100 rounded ">Estado</button>
                                 </div>
 
                             </div>
@@ -73,11 +71,13 @@
             </div>
 
         </div>
-        <div class="col-md-2 mt-5">
-            <h1>filtrar</h1>
+        <div class="col-md-2 mt-5 py-2 pb-2">
+            <h4>Filtrar</h4>
+            <hr/>
+
             <!-- Filtro por ID -->
-            <input type="text" id="filtroId" class="form-control mb-2" placeholder="ID">
-            <button class="btn btn-dark w-100 rounded-pill" onclick="filtrarPorId()">Filtrar</button>
+            <input type="text" id="filtroId" class="form-control mb-2" placeholder="Mesa No">
+            <button class="btn btn-dark w-100 rounded-3 mt-3" onclick="filtrarPorId()">Filtrar</button>
         </div>
 
     </div>
