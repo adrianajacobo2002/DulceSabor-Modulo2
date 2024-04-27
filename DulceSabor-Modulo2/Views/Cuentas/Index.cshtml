@@ -1,12 +1,4 @@
-﻿
-
-    
-
-
-
-<!--La vaina de Drigo jejejjejeje-->
-
-<div class="container">
+﻿<div class="container">
     <div class="row">
         <div class="col-md-10 pb-3">
             <h1>Cuentas</h1>
@@ -24,174 +16,163 @@
             <!-- Tab panes -->
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active py-5" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
-
-                    <a class="text-decoration-none text-black py-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        <div class="card mb-3 w-100 p-1 border-dark">
-                            <div class="row g-0">
-
-                                <div class="col-md-10">
-                                    <div class="card-body">
-                                        <p class="card-title">Mesa ##</p>
-                                        <p>Order ###</p>
-                                        <p class="card-text">Nombre Cliente</p>
+                    @foreach (var cuenta in (IEnumerable<dynamic>)ViewData["abiertas"])
+                    {
+                        <a class="text-decoration-none text-black py-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop-@cuenta.OrdenId">
+                            <div class="card mb-3 w-100 p-1 border-dark">
+                                <div class="row g-0">
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <p class="card-title">Mesa #@cuenta.Mesa</p>
+                                            <p>Order #@cuenta.OrdenId</p>
+                                            <p class="card-text">@cuenta.Nombre</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2 pe-5 d-flex align-items-center justify-content-end">
-                                    <button class="btn btn-warning w-100 rounded ">Abierta</button>
-                                </div>
+                            </div>
+                        </a>
 
+                        <div class="modal fade" id="staticBackdrop-@cuenta.OrdenId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!--  titulo dettalle y boton estado -->
+                                        <div class="container text">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Detalles de la cuenta</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Input texts -->
+                                        <div class="container">
+                                            <div class="row">
+                                                <!-- Input texts -->
+                                                <div class="col-sm-9">
+                                                    <div class="row">
+                                                        <div class="col-8 col-sm-6">
+                                                            <p class="orden text-sm-start">Orden #@cuenta.OrdenId</p>
+                                                        </div>
+                                                        <div class="col-4 col-sm-6">
+                                                            <p class="mesa text-sm-start">Mesa #@cuenta.Mesa</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-3">
+                                                        <div class="col-12">
+                                                            <p class="nombre text-sm-start">Nombre: @cuenta.Nombre</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Subtotal, Propina y Total -->
+                                                <div class="col-sm-3 d-flex justify-content-center">
+                                                    <div class="textototal ">
+                                                        <h5>Subtotal</h5>
+                                                        <label class="d-flex justify-content-end" for="subtotal"><p>$@cuenta.subtotal</p></label>
+
+                                                        <h5>Propina</h5>
+                                                        <label class="d-flex justify-content-end" for="propina"><p>$@(cuenta.subtotal * (decimal)0.1)</p></label>
+
+                                                        <h5>Total</h5>
+                                                        <label class="d-flex justify-content-end" for="total"><p>$@(cuenta.subtotal * (decimal)1.1)</p></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <form asp-action="Pagar">
+                                            @Html.Hidden("cuentaId", (int)cuenta.OrdenId)
+                                            <div class="modal-footer justify-content-center d-flex">
+                                                <button class="btn btn-dark btnPagar justify-content-center">Pagar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </a>
-
-
-
+                    }
                 </div>
                 <div class="tab-pane fade py-5" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                    @foreach (var cuenta in (IEnumerable<dynamic>)ViewData["cerradas"])
+                    {
+                        <a class="text-decoration-none text-black py-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop-cerrados-@cuenta.OrdenId">
+                            <div class="card mb-3 w-100 p-1 border-dark">
+                                <div class="row g-0">
 
-                    <a class="text-decoration-none text-black py-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        <div class="card mb-3 w-100 p-1 border-dark">
-                            <div class="row g-0">
-
-                                <div class="col-md-10">
-                                    <div class="card-body">
-                                        <p class="card-title">Mesa ##</p>
-                                        <p>Order ###</p>
-                                        <p class="card-text">Nombre Cliente</p>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <p class="card-title">Mesa #@cuenta.Mesa</p>
+                                            <p>Order #@cuenta.OrdenId</p>
+                                            <p class="card-text">Nombre Cliente: @cuenta.Nombre</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2 pe-5 d-flex align-items-center justify-content-end">
-                                    <button class="btn btn-success w-100 rounded ">Cerrada</button>
-                                </div>
+                            </div>
+                        </a>
+                        <div class="modal fade" id="staticBackdrop-cerrados-@cuenta.OrdenId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!--  titulo dettalle y boton estado -->
+                                        <div class="container text">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Detalles de la cuenta</h1>
+                                                </div>
+                                            </div>
+                                        </div>
 
+                                        <!-- Input texts -->
+                                        <div class="container">
+                                            <div class="row">
+                                                <!-- Input texts -->
+                                                <div class="col-sm-9">
+                                                    <div class="row">
+                                                        <div class="col-8 col-sm-6">
+                                                            <p class="orden text-sm-start">Orden #@cuenta.OrdenId</p>
+                                                        </div>
+                                                        <div class="col-4 col-sm-6">
+                                                            <p class="mesa text-sm-start">Mesa #@cuenta.Mesa</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row py-3">
+                                                        <div class="col-12">
+                                                            <p class="nombre text-sm-start">Nombre: @cuenta.Nombre</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Subtotal, Propina y Total -->
+                                                <div class="col-sm-3 d-flex justify-content-center">
+                                                    <div class="textototal ">
+                                                        <h5>Subtotal</h5>
+                                                        <label class="d-flex justify-content-end" for="subtotal"><p>$@cuenta.subtotal</p></label>
+
+                                                        <h5>Propina</h5>
+                                                        <label class="d-flex justify-content-end" for="propina"><p>$@(cuenta.subtotal * (decimal)0.1)</p></label>
+
+                                                        <h5>Total</h5>
+                                                        <label class="d-flex justify-content-end" for="total"><p>$@(cuenta.subtotal * (decimal)1.1)</p></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </a>
+                    }
                 </div>
-            </div>
-
         </div>
-        <div class="col-md-2 mt-5 py-2 pb-2">
-            <h4>Filtrar</h4>
-            <hr/>
-
-            <!-- Filtro por ID -->
-            <input type="text" id="filtroId" class="form-control mb-2" placeholder="Mesa No">
-            <button class="btn btn-dark w-100 rounded-3 mt-3" onclick="filtrarPorId()">Filtrar</button>
-        </div>
-
     </div>
 </div>
 
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
-
-
-
-
-<!-- Modal Rick -->
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!--  titulo dettalle y boton estado -->
-                <div class="container text">
-                    <div class="row">
-                        <div class="col">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Detalles de la cuenta</h1>
-                        </div>
-
-                        <div class="col">
-
-                            <div class="btn-1 justify-content-end d-flex">
-                                <p>
-                                    <button class="btn btn-dark btnestado">Estado</button>
-                                </p>
-
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <!-- Input texts -->
-                <div class="container">
-                    <div class="row">
-                        <!-- Input texts -->
-                        <div class="col-sm-9">
-                            <div class="row">
-                                <div class="col-8 col-sm-6">
-                                    <p class="orden text-sm-start">Orden ###</p>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-4 col-sm-6">
-                                    <p class="mesa text-sm-start">Mesa #</p>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row py-3">
-                                <div class="col-12">
-                                    <p class="nombre text-sm-start">Nombre</p>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Subtotal, Propina y Total -->
-                        <div class="col-sm-3 d-flex justify-content-center">
-                            <div class="textototal ">
-                                <h5>Subtotal</h5>
-                                <label class="d-flex justify-content-end" for="subtotal"><p>$38.75</p></label>
-
-                                <h5>Propina</h5>
-                                <label class="d-flex justify-content-end" for="propina"><p>$1.25</p></label>
-
-                                <h5>Total</h5>
-                                <label class="d-flex justify-content-end" for="total"><p>$40.00</p></label>
-                            </div>
-                        </div>
-                    </div>
-
-                 <div class="row">
-                      <div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
-                           <ul class="list-group">
-                                <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-10">
-                                                Platillo 1
-                                            </div>
-                                            <div class="col">
-                                                <button class="btn btn-dark btnPagar justify-content-end">Estado</button>
-                                            </div>
-
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-10">
-                                                Platillo 2
-                                            </div>
-                                        <div class="col">
-                                            <button class="btn btn-dark btnPagar">Estado</button>
-                                        </div>
-                                    </li>
-                           </ul>
-                       </div>
-                 </div>
-
-
-                    </div>
-                    <div class="modal-footer justify-content-center d-flex">
-                        <button class="btn btn-dark btnPagar justify-content-center">Pagar</button>
-
-                    </div>
-                </div>
-            </div>
-        </div>

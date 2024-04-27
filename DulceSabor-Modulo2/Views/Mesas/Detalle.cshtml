@@ -1,44 +1,55 @@
-﻿<form asp-action="Detalle">
-    <div class="container">
-        <div class="row py-4 justify-content-between w-100">
-            <div class="col-md-6">
-                <h2>Mesa 1</h2>
-            </div>
-            <div class="col-md-6 d-flex justify-content-end">
-                <button type="button" class="btn btn-dark px-5">Estado</button>
-            </div>
-            <div class="py-5">
-                <div class="row pb-4">
-                    <div class="col-md-5">
-                        <label for="nombre"><h5>Nombre</h5></label>
-                        
+﻿@{
+    Mesa? mesa = (Mesa)ViewData["mesa"];
+    string estado = mesa?.Estado == true ? "Disponible" : "No Disponible";
+    int id = mesa?.Id ?? 0;
 
-                    </div>
-                    <div class="col-md-5">
-                        <label for="nombre"><h5>Apellido</h5></label>
-                       
-                    </div>
-                   
+    Cuenta? cuenta = (Cuenta)ViewData["cuenta"];
+}
+<div class="container">
+    <div class="row py-4 justify-content-between w-100">
+        <div class="col-md-6">
+            <h2>Mesa 1</h2>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <button type="button" class="btn btn-dark px-5">@estado</button>
+        </div>
+        <div class="py-5">
+            <div class="row pb-4">
+                <div class="col-md-5">
+                    <label for="nombre"><h5>Nombre</h5></label>
+
+
                 </div>
-                <div class="row">
+                <div class="col-md-5">
+                    <label for="nombre"><h5>Apellido</h5></label>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <form asp-action="AgregarCliente">
                     <div class="col-md-5">
-                        <input type="text" class="form-control" id="nombre" placeholder="Escribe tu nombre aquí">
+                        @Html.TextBox("nombre", "", new { @class = "form-control", placeholder = "Escribe tu nombre aquí" })
                     </div>
                     <div class="col-md-5">
-                        <input type="text" class="form-control" id="apellido" placeholder="Escribe tu nombre aquí">
+                        @Html.TextBox("apellido", "", new { @class = "form-control", placeholder = "Escribe tu apellido aquí" })
                     </div>
-                    <div class="col-md-2 col-sm-10 d-flex justify-content-center align-items-center" ">
-                        <button class="btn btn-dark rounded-3 ms-4" type="button">
+                    @Html.Hidden("idMesa", id)
+                    <div class="col-md-2 col-sm-10 d-flex justify-content-center align-items-center">
+                        <button class="btn btn-dark rounded-3 ms-4" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                             </svg>
                         </button>
                     </div>
-                </div>
-                <div class="row py-4">
-                    <h5>Detalle Cliente</h5>
-                </div>
+                </form>
+            </div>
+            <div class="row py-4">
+                <h5>Detalle Cliente</h5>
+            </div>
 
+            @if (cuenta != null)
+            {
                 <div class="card mb-3 w-100 p-1 border-dark">
                     <div class="row g-0">
 
@@ -46,10 +57,10 @@
                             <div class="card-body">
                                 <p class="card-title">Nombre Cliente</p>
                                 <a class="text-decoration-none" data-bs-toggle="collapse" href="#multiCollapseExample1">
-                                    <p>Order ###</p>
+                                    <p>Order @cuenta.IdCuenta</p>
                                 </a>
-                                
-                                <p class="card-text">Subtotal: $00.00</p>
+
+                                <p class="card-text">Subtotal: @ViewData["total"]</p>
                             </div>
                         </div>
                         <div class="col-md-2 pe-5 d-flex align-items-center justify-content-end">
@@ -61,97 +72,107 @@
                         </div>
 
                     </div>
-                    
-                    
+
+
                 </div>
                 <div class="collapse multi-collapse scrollable" id="multiCollapseExample1">
                     <div class="card card-body">
                         <div class="container py-3">
                             <div class="row">
-
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="card" style="height:150px">
-                                        <div class="card-body">
-                                            <div class="pb-1">
-                                                <p>Nombre Platillo <span class="badge text-white bg-success text-end"> Solicitado</span></p>
-                                            </div>
-                                           
-                                            <small>Precio: $00.00</small>
-                                            <br />
-                                            <div class="d-flex">
-                                                <div>
-                                                    <small>Comentarios: Ensalada sin lechuga</small>
+                                @foreach (var detalle in (IEnumerable<dynamic>)ViewData["platos"])
+                                {
+                                    <div class="col-md-4">
+                                        <div class="card" style="height:150px">
+                                            <div class="card-body">
+                                                <div class="pb-1">
+                                                    <p>
+                                                        @detalle.nombre <span class="badge text-white bg-warning text-end"> @detalle.estado</span>
+                                                    </p>
                                                 </div>
-                                                
-                                                <div class="d-flex justify-content-end align-items-end">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            
+                                                <small>Precio: $@detalle.precio</small>
+                                                <br />
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <small>Comentarios: @detalle.comentario</small>
+                                                    </div>
 
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card" style="height:150px">
-                                        <div class="card-body">
-                                            <div class="pb-1">
-                                                <p>Nombre Platillo <span class="badge text-white bg-success text-end"> Solicitado</span></p>
-                                            </div>
-
-                                            <small>Precio: $00.00</small>
-                                            <br />
-                                            <div class="d-flex">
-                                                <div>
-                                                    <small>Comentarios: Ensalada sin lechuga</small>
-                                                </div>
-
-                                                <div class="d-flex justify-content-end align-items-end">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-                                                    </svg>
+                                                    <div class="d-flex justify-content-end align-items-end">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                                        </svg>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
 
-                                <div class="col-md-4">
-                                    <div class="card" style="height:150px">
-                                        <div class="card-body">
-                                            <div class="pb-1">
-                                                <p>Nombre Platillo <span class="badge text-white bg-warning text-end"> En Proceso</span></p>
-                                            </div>
-
-                                            <small>Precio: $00.00</small>
-                                            <br />
-                                            <div class="d-flex">
-                                                <div>
-                                                    <small>Comentarios: Ensalada sin lechuga</small>
+                                @foreach (var detalle in (IEnumerable<dynamic>)ViewData["promociones"])
+                                {
+                                    <div class="col-md-4">
+                                        <div class="card" style="height:150px">
+                                            <div class="card-body">
+                                                <div class="pb-1">
+                                                    <p>
+                                                        @detalle.nombre <span class="badge text-white bg-warning text-end"> @detalle.estado</span>
+                                                    </p>
                                                 </div>
+                                                <small>Precio: $@detalle.precio</small>
+                                                <br />
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <small>Comentarios: @detalle.comentario</small>
+                                                    </div>
 
-                                                
+                                                    <div class="d-flex justify-content-end align-items-end">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
                                             </div>
-
-
-
                                         </div>
                                     </div>
-                                </div>
-                                
+                                }
 
+                                @foreach (var detalle in (IEnumerable<dynamic>)ViewData["combos"])
+                                {
+                                    <div class="col-md-4">
+                                        <div class="card" style="height:150px">
+                                            <div class="card-body">
+                                                <div class="pb-1">
+                                                    <p>
+                                                        @detalle.nombre <span class="badge text-white bg-warning text-end"> @detalle.estado</span>
+                                                    </p>
+                                                </div>
+                                                <small>Precio: $@detalle.precio</small>
+                                                <br />
+                                                <div class="d-flex">
+                                                    <div>
+                                                        <small>Comentarios: @detalle.comentario</small>
+                                                    </div>
+
+                                                    <div class="d-flex justify-content-end align-items-end">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
+            }
         </div>
     </div>
 
@@ -161,7 +182,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    
+
                     <div class="accordion" id="accordionExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
@@ -213,13 +234,13 @@
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed bg-white text-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button class="accordion-button collapsed bg-white text-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     Agregar combo
                                 </button>
                             </h2>
                             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                
+
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">Menú combos</h5>
@@ -233,22 +254,22 @@
                                                 <option value="bebidas">Bebidas</option>
                                             </select>
 
-                                                <div class=" py-3">
-                                                  <table class="table mb-3">
-                                                      <thead >
-                                                            <tr>
-                                                                <th scope="col">#</th>
-                                                                <th scope="col">Nombre</th>
-                                                                <th scope="col">Descripción</th>
-                                                                <th scope="col">Precio</th>
-                                                            </tr>
-                                                      </thead>
-                                                      <tbody>
-                                                            <!-- Aquí se mostrarían los elementos de la categoría seleccionada -->
-                                                      </tbody>
-                                                 </table>
+                                            <div class=" py-3">
+                                                <table class="table mb-3">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Nombre</th>
+                                                            <th scope="col">Descripción</th>
+                                                            <th scope="col">Precio</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- Aquí se mostrarían los elementos de la categoría seleccionada -->
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                            
+
                                             <h5>Comentarios</h5>
                                             <input type="text" class="form-control" placeholder="Añade tu comentario...">
                                             <div class="modal-footer">
@@ -256,19 +277,19 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
-                                    <button class="accordion-button collapsed bg-white text-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <button class="accordion-button collapsed bg-white text-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                     Agregar promocion
                                 </button>
                             </h2>
                             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                
+
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">Menú promociones</h5>
@@ -301,7 +322,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -321,6 +342,5 @@
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</form>
